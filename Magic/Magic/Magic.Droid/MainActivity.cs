@@ -21,7 +21,7 @@ namespace Magic.Droid
             //Get Buttons
 			Button button = FindViewById<Button> (Resource.Id.myButton);
 			
-            //Event Listener
+            //Event Listeners
 			button.Click += delegate 
             {
                 var intent = new Intent(this, typeof(CameraPreviewActivity));
