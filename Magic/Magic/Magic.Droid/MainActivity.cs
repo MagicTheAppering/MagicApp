@@ -1,15 +1,12 @@
-﻿using System;
-
+﻿
 using Android.App;
 using Android.Content;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.OS;
 
 namespace Magic.Droid
 {
-	[Activity (Label = "Magic.Droid", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity (Label = "Magic.Droid", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
 		int count = 1;
@@ -18,16 +15,18 @@ namespace Magic.Droid
 		{
 			base.OnCreate (bundle);
 
-			// Set our view from the "main" layout resource
+			//Set View
 			SetContentView (Resource.Layout.Main);
 
-			// Get our button from the layout resource,
-			// and attach an event to it
+            //Get Buttons
 			Button button = FindViewById<Button> (Resource.Id.myButton);
 			
-			button.Click += delegate {
-				button.Text = string.Format ("{0} clicks!", count++);
-			};
+            //Event Listener
+			button.Click += delegate 
+            {
+                var intent = new Intent(this, typeof(CameraPreviewActivity));
+                StartActivity(intent);
+            };
 		}
 	}
 }

@@ -31,6 +31,12 @@ namespace Magic.Droid
 		public partial class Attribute
 		{
 			
+			// aapt resource value: 0x7f010001
+			public const int camera_id = 2130771969;
+			
+			// aapt resource value: 0x7f010000
+			public const int show_fps = 2130771968;
+			
 			static Attribute()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -61,7 +67,19 @@ namespace Magic.Droid
 		{
 			
 			// aapt resource value: 0x7f050000
-			public const int myButton = 2131034112;
+			public const int any = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int back = 2131034113;
+			
+			// aapt resource value: 0x7f050002
+			public const int front = 2131034114;
+			
+			// aapt resource value: 0x7f050003
+			public const int myButton = 2131034115;
+			
+			// aapt resource value: 0x7f050004
+			public const int surfaceView = 2131034116;
 			
 			static Id()
 			{
@@ -78,6 +96,9 @@ namespace Magic.Droid
 			
 			// aapt resource value: 0x7f030000
 			public const int Main = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int Preview = 2130903041;
 			
 			static Layout()
 			{
@@ -104,6 +125,29 @@ namespace Magic.Droid
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Styleable
+		{
+			
+			public static int[] CameraBridgeViewBase = new int[] {
+					2130771968,
+					2130771969};
+			
+			// aapt resource value: 1
+			public const int CameraBridgeViewBase_camera_id = 1;
+			
+			// aapt resource value: 0
+			public const int CameraBridgeViewBase_show_fps = 0;
+			
+			static Styleable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Styleable()
 			{
 			}
 		}
