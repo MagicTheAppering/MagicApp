@@ -19,7 +19,7 @@ namespace Magic.Droid
 			SetContentView (Resource.Layout.Main);
 
             //Get Buttons
-			Button button = FindViewById<Button> (Resource.Id.myButton);
+			Button button = FindViewById<Button> (Resource.Id.MainButtonCam);
 			
             //Event Listeners
 			button.Click += delegate 
