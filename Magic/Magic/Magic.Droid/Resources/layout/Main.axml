@@ -13,4 +13,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="BlobDetection" />
+
+  <Button
+    android:id="@+id/MainButtonCameraControl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="CamControl" />
 </LinearLayout>

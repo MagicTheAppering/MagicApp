@@ -38,8 +38,9 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenCV">
-      <HintPath>..\..\..\..\..\..\Desktop\OpenCV.dll</HintPath>
+    <Reference Include="OpenCV, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Desktop\OpenCV\armeabi-v7a\OpenCV.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -52,6 +53,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Examples\CameraControlActivity.cs" />
+    <Compile Include="Examples\CameraControlView.cs" />
     <Compile Include="Examples\ColorBlobDetectionActivity.cs" />
     <Compile Include="Examples\ColorBlobDetector.cs" />
     <Compile Include="Examples\CameraPreviewActivity.cs" />
@@ -69,9 +72,14 @@
     <AndroidResource Include="Resources\layout\color_blob_detection_surface_view.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\CameraControl.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\Main.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />

@@ -4,13 +4,13 @@ using Android.Content;
 using Android.Widget;
 using Android.OS;
 using Magic.Droid.Examples;
+using Magic.Droid.Examples.CameraControl;
 
 namespace Magic.Droid
 {
     [Activity (Label = "Magic.Droid", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
-		int count = 1;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -22,6 +22,7 @@ namespace Magic.Droid
             //Get Buttons
 			Button buttonCam = FindViewById<Button> (Resource.Id.MainButtonCam);
             Button buttonBlob = FindViewById<Button>(Resource.Id.MainButtonBlob);
+            Button buttonControl = FindViewById<Button>(Resource.Id.MainButtonCameraControl);
 
             //Event Listeners
             buttonCam.Click += delegate 
@@ -33,6 +34,12 @@ namespace Magic.Droid
             buttonBlob.Click += delegate
             {
                 var intent = new Intent(this, typeof(ColorBlobDetectionActivity));
+                StartActivity(intent);
+            };
+
+            buttonControl.Click += delegate
+            {
+                var intent = new Intent(this, typeof(CameraControlActivity));
                 StartActivity(intent);
             };
         }
