@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\tessdata\deu.traineddata" />
+    <AndroidAsset Include="Assets\tessdata\eng.traineddata" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />

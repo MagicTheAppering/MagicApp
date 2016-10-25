@@ -34,7 +34,7 @@ namespace Magic.Droid
             SetContentView(Resource.Layout.OCRTest);
 
             //Get Textview
-            TextView result = FindViewById<TextView>(Resource.Id.OCRTestText);
+            result = FindViewById<TextView>(Resource.Id.OCRTestText);
 
             //Get Buttons
             Button buttonOcr = FindViewById<Button>(Resource.Id.OCRTestButton1);
@@ -70,7 +70,7 @@ namespace Magic.Droid
             }
             else
             {
-                Console.WriteLine("------------------nopeeeeeee");
+                System.Console.WriteLine("------------------nopeeeeeee");
             }
             
 
@@ -78,9 +78,38 @@ namespace Magic.Droid
             
         }
 
-        public async Task<bool> initTes()
+        public void copyTessdate()
         {
-            bool initialised = await api.Init("deu");
+            var tmpPath = Android.OS.Environment.ExternalStorageDirectory.Path + "eng.traineddata";
+            using (var asset = Assets.Open("eng.traineddata")) using (var dest = File.Create(tmpPath)) asset.CopyTo(dest);
+            
+        }
+
+
+    public async Task<bool> initTes()
+        {
+            //Copy Asset to sd
+
+            AssetManager assets = this.Assets;
+
+
+            //var androidPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+
+            //var dir = new Java.IO.File(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/tessdata/");
+
+            ////var tessPath = androidPath + "/tessdata";
+
+            //if(!dir.Exists())
+            //{
+            //    dir.Mkdir();
+            //}
+
+            //var dataPath = Android.OS.Environment.ExternalStorageDirectory.Path + "/eng.traineddata";
+            //using (var asset = Assets.Open("tessdata/eng.traineddata")) using (var dest = File.Create(dataPath)) asset.CopyTo(dest);
+
+            //var asset = Assets.Open("tessdata/eng.traineddata");
+
+            bool initialised = await api.Init("/sdcard/", "eng");
 
             return initialised;
         }
