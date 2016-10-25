@@ -26,6 +26,8 @@ namespace Magic.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Tesseract.Droid.Resource.String.ApplicationName = global::Magic.Droid.Resource.String.ApplicationName;
+			global::Tesseract.Droid.Resource.String.Hello = global::Magic.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
@@ -52,6 +54,9 @@ namespace Magic.Droid
 			
 			// aapt resource value: 0x7f020000
 			public const int Icon = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int test = 2130837505;
 			
 			static Drawable()
 			{
@@ -81,8 +86,17 @@ namespace Magic.Droid
 			// aapt resource value: 0x7f050009
 			public const int MainButtonImageManipulation = 2131034121;
 			
+			// aapt resource value: 0x7f05000a
+			public const int MainButtonOCRTest = 2131034122;
+			
 			// aapt resource value: 0x7f050005
 			public const int ManipulationView = 2131034117;
+			
+			// aapt resource value: 0x7f05000b
+			public const int OCRTestButton1 = 2131034123;
+			
+			// aapt resource value: 0x7f05000c
+			public const int OCRTestText = 2131034124;
 			
 			// aapt resource value: 0x7f050000
 			public const int any = 2131034112;
@@ -96,8 +110,8 @@ namespace Magic.Droid
 			// aapt resource value: 0x7f050002
 			public const int front = 2131034114;
 			
-			// aapt resource value: 0x7f05000a
-			public const int surfaceView = 2131034122;
+			// aapt resource value: 0x7f05000d
+			public const int surfaceView = 2131034125;
 			
 			static Id()
 			{
@@ -125,7 +139,10 @@ namespace Magic.Droid
 			public const int Main = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int Preview = 2130903044;
+			public const int OCRTest = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int Preview = 2130903045;
 			
 			static Layout()
 			{
@@ -141,10 +158,16 @@ namespace Magic.Droid
 		{
 			
 			// aapt resource value: 0x7f040001
-			public const int app_name = 2130968577;
+			public const int ApplicationName = 2130968577;
 			
 			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
+			public const int Hello = 2130968576;
+			
+			// aapt resource value: 0x7f040003
+			public const int app_name = 2130968579;
+			
+			// aapt resource value: 0x7f040002
+			public const int hello = 2130968578;
 			
 			static String()
 			{

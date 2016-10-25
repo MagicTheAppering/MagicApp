@@ -25,6 +25,7 @@ namespace Magic.Droid
             Button buttonBlob = FindViewById<Button>(Resource.Id.MainButtonBlob);
             Button buttonControl = FindViewById<Button>(Resource.Id.MainButtonCameraControl);
             Button buttonManipulation = FindViewById<Button>(Resource.Id.MainButtonImageManipulation);
+            Button buttonOCRTest = FindViewById<Button>(Resource.Id.MainButtonOCRTest);
 
             //Event Listeners
             buttonCam.Click += delegate 
@@ -48,6 +49,12 @@ namespace Magic.Droid
             buttonManipulation.Click += delegate
             {
                 var intent = new Intent(this, typeof(ImageManipulationsActivity));
+                StartActivity(intent);
+            };
+
+            buttonOCRTest.Click += delegate
+            {
+                var intent = new Intent(this, typeof(TestOCR));
                 StartActivity(intent);
             };
         }
