@@ -53,6 +53,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Examples\ImageManipulationsActivity.cs" />
     <Compile Include="Examples\CameraControlActivity.cs" />
     <Compile Include="Examples\CameraControlView.cs" />
     <Compile Include="Examples\ColorBlobDetectionActivity.cs" />
@@ -73,6 +74,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CameraControl.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ImageManipulation.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -7,16 +7,21 @@
         android:id="@+id/MainButtonCam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cam" />
+        android:text="Cam Test" />
   <Button
     android:id="@+id/MainButtonBlob"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="BlobDetection" />
+    android:text="Blob Detection" />
 
   <Button
     android:id="@+id/MainButtonCameraControl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="CamControl" />
+    android:text="Cam Control" />
+  <Button
+    android:id="@+id/MainButtonImageManipulation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Img Manipulation" />
 </LinearLayout>

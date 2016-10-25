@@ -5,6 +5,7 @@ using Android.Widget;
 using Android.OS;
 using Magic.Droid.Examples;
 using Magic.Droid.Examples.CameraControl;
+using Magic.Droid.Examples.Manipulation;
 
 namespace Magic.Droid
 {
@@ -23,6 +24,7 @@ namespace Magic.Droid
 			Button buttonCam = FindViewById<Button> (Resource.Id.MainButtonCam);
             Button buttonBlob = FindViewById<Button>(Resource.Id.MainButtonBlob);
             Button buttonControl = FindViewById<Button>(Resource.Id.MainButtonCameraControl);
+            Button buttonManipulation = FindViewById<Button>(Resource.Id.MainButtonImageManipulation);
 
             //Event Listeners
             buttonCam.Click += delegate 
@@ -40,6 +42,12 @@ namespace Magic.Droid
             buttonControl.Click += delegate
             {
                 var intent = new Intent(this, typeof(CameraControlActivity));
+                StartActivity(intent);
+            };
+
+            buttonManipulation.Click += delegate
+            {
+                var intent = new Intent(this, typeof(ImageManipulationsActivity));
                 StartActivity(intent);
             };
         }
