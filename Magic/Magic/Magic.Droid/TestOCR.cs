@@ -26,7 +26,7 @@ namespace Magic.Droid
         TesseractApi api;
         TextView result;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
@@ -45,20 +45,17 @@ namespace Magic.Droid
                 getText();
             };
 
+            //Tesseract Api einmal bei start erzeugen
             api = new TesseractApi(this, AssetsDeployment.OncePerVersion);
+
+            //Warten auf initialisierung
+            bool check = await initTes();
 
         }
 
-
+        //Text aus Bild
         public async void getText()
         {
-
-
-
-            bool check = await initTes();
-            
-            if(check)
-            {
                 byte[] img = await getBytesFromBitmap(Resource.Drawable.test);
 
                 bool success = await api.SetImage(img);
@@ -67,31 +64,15 @@ namespace Magic.Droid
                     string textResult = api.Text;
                     result.Text = textResult;
                 }
-            }
-            else
-            {
-                System.Console.WriteLine("------------------nopeeeeeee");
-            }
-            
 
-
-            
-        }
-
-        public void copyTessdate()
-        {
-            var tmpPath = Android.OS.Environment.ExternalStorageDirectory.Path + "eng.traineddata";
-            using (var asset = Assets.Open("eng.traineddata")) using (var dest = File.Create(tmpPath)) asset.CopyTo(dest);
-            
         }
 
 
     public async Task<bool> initTes()
         {
-            //Copy Asset to sd
+            //Copy Asset to sd if needed
 
-            AssetManager assets = this.Assets;
-
+            //AssetManager assets = this.Assets;
 
             //var androidPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
 
@@ -109,11 +90,19 @@ namespace Magic.Droid
 
             //var asset = Assets.Open("tessdata/eng.traineddata");
 
-            bool initialised = await api.Init("/sdcard/", "eng");
+            //bool initialised = await api.Init("/sdcard/", "eng");
+
+            //datapath = FilesDir.Path + "Assets";
+
+            //datapath = System.IO.Path.GetFullPath("eng.traineddata");
+
+            bool initialised = await api.Init("eng");
 
             return initialised;
         }
 
+        //Bitmap in Bytestring umwandeln
+        //------------------Todo: img link einfügen
         public async System.Threading.Tasks.Task<byte[]> getBytesFromBitmap(int img)
         {
             BitmapFactory.Options options = new BitmapFactory.Options
