@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.Widget;
 using Android.OS;
+using Magic.Droid.Examples;
 
 namespace Magic.Droid
 {
@@ -19,15 +20,22 @@ namespace Magic.Droid
 			SetContentView (Resource.Layout.Main);
 
             //Get Buttons
-			Button button = FindViewById<Button> (Resource.Id.MainButtonCam);
-			
+			Button buttonCam = FindViewById<Button> (Resource.Id.MainButtonCam);
+            Button buttonBlob = FindViewById<Button>(Resource.Id.MainButtonBlob);
+
             //Event Listeners
-			button.Click += delegate 
+            buttonCam.Click += delegate 
             {
                 var intent = new Intent(this, typeof(CameraPreviewActivity));
                 StartActivity(intent);
             };
-		}
+
+            buttonBlob.Click += delegate
+            {
+                var intent = new Intent(this, typeof(ColorBlobDetectionActivity));
+                StartActivity(intent);
+            };
+        }
 	}
 }
 

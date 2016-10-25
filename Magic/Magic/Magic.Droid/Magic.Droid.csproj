@@ -52,7 +52,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CameraPreviewActivity.cs" />
+    <Compile Include="Examples\ColorBlobDetectionActivity.cs" />
+    <Compile Include="Examples\ColorBlobDetector.cs" />
+    <Compile Include="Examples\CameraPreviewActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +64,9 @@
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\Preview.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\color_blob_detection_surface_view.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

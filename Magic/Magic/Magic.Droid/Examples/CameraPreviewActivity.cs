@@ -7,7 +7,7 @@ using OpenCV.Core;
 using OpenCV.Android;
 using OpenCV;
 
-namespace Magic.Droid
+namespace Magic.Droid.Examples
 {
     [Activity(Label = "CamPreview",
         ScreenOrientation = ScreenOrientation.Landscape,
