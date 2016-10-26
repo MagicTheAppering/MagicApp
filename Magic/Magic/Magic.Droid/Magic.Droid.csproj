@@ -71,6 +71,7 @@
     <Compile Include="Examples\ColorBlobDetectionActivity.cs" />
     <Compile Include="Examples\ColorBlobDetector.cs" />
     <Compile Include="Examples\CameraPreviewActivity.cs" />
+    <Compile Include="ImageViewOCR.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +97,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\OCRTest.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ImageViewOCR.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

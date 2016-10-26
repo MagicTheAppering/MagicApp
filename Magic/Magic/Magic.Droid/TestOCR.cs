@@ -27,6 +27,8 @@ namespace Magic.Droid
 
         private TextView result;
 
+        byte[] img;
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -39,11 +41,17 @@ namespace Magic.Droid
 
             //Get Buttons
             Button buttonOcr = FindViewById<Button>(Resource.Id.OCRTestButton1);
+            Button buttonShow = FindViewById<Button>(Resource.Id.OCRTestButton2);
 
             //Event Listeners
             buttonOcr.Click += delegate
             {
                 getText();
+            };
+
+            buttonShow.Click += delegate
+            {
+                showImage(img);
             };
 
             //Tesseract Api einmal bei start erzeugen
@@ -52,23 +60,22 @@ namespace Magic.Droid
             //Warten auf initialisierung
             bool check = await initTes();
 
+            //Image von Resource laden
+            img = await getBytesFromBitmap(Resource.Drawable.test);
         }
 
         //Text aus Bild
         public async void getText()
         {
-                byte[] img = await getBytesFromBitmap(Resource.Drawable.test);
-
-                bool success = await api.SetImage(img);
-                if (success)
-                {
-                    string textResult = api.Text;
-                    result.Text = textResult;
-                    saveImage(img);
-                }
+            bool success = await api.SetImage(img);
+            if (success)
+            {
+                string textResult = api.Text;
+                result.Text = textResult;  
+            }
         }
 
-
+        //Api starten und Trainingsdaten laden
         public async Task<bool> initTes()
         {
             bool initialised = await api.Init("eng");
@@ -117,6 +124,22 @@ namespace Magic.Droid
             var stream = new FileStream(imatge, FileMode.Create);
             bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
             stream.Close();
+        }
+
+        //Image an die ImageView Activity übergeben und anzeigen
+        public void showImage(byte[] byteImg)
+        {
+            var intent = new Intent(this, typeof(ImageViewOCR));
+
+            //Bundle erzeugen und ByteArray speichern
+            Bundle b = new Bundle();
+            b.PutByteArray("img", byteImg);
+
+            //Bundle zu Intent hinzufügen
+            intent.PutExtra("img",b);
+
+            //Activity starten
+            StartActivity(intent);
         }
     }
 }
