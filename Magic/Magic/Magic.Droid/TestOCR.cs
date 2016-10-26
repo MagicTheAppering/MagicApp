@@ -23,8 +23,9 @@ namespace Magic.Droid
     public class TestOCR : Activity
     {
 
-        TesseractApi api;
-        TextView result;
+        private TesseractApi api;
+
+        private TextView result;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -63,39 +64,13 @@ namespace Magic.Droid
                 {
                     string textResult = api.Text;
                     result.Text = textResult;
+                    saveImage(img);
                 }
-
         }
 
 
-    public async Task<bool> initTes()
+        public async Task<bool> initTes()
         {
-            //Copy Asset to sd if needed
-
-            //AssetManager assets = this.Assets;
-
-            //var androidPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-
-            //var dir = new Java.IO.File(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/tessdata/");
-
-            ////var tessPath = androidPath + "/tessdata";
-
-            //if(!dir.Exists())
-            //{
-            //    dir.Mkdir();
-            //}
-
-            //var dataPath = Android.OS.Environment.ExternalStorageDirectory.Path + "/eng.traineddata";
-            //using (var asset = Assets.Open("tessdata/eng.traineddata")) using (var dest = File.Create(dataPath)) asset.CopyTo(dest);
-
-            //var asset = Assets.Open("tessdata/eng.traineddata");
-
-            //bool initialised = await api.Init("/sdcard/", "eng");
-
-            //datapath = FilesDir.Path + "Assets";
-
-            //datapath = System.IO.Path.GetFullPath("eng.traineddata");
-
             bool initialised = await api.Init("eng");
 
             return initialised;
@@ -111,7 +86,7 @@ namespace Magic.Droid
             };
 
         
-            Bitmap result = await BitmapFactory.DecodeResourceAsync(Resources, Resource.Drawable.test);
+            Bitmap result = await BitmapFactory.DecodeResourceAsync(Resources, Resource.Drawable.testAE);
 
             byte[] bitmapData;
             using (var stream = new MemoryStream())
@@ -121,6 +96,27 @@ namespace Magic.Droid
             }
 
             return bitmapData;
+        }
+
+        //ByteArray zu IMG umwandeln und speichern
+        public void saveImage(byte[] byteImg)
+        {
+            //ByteArray to Image
+            Bitmap bitmap = BitmapFactory.DecodeByteArray(byteImg, 0, byteImg.Length);
+
+            //Speicherort
+            var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+
+            //Create a folder for the images if not exists
+            Directory.CreateDirectory(System.IO.Path.Combine(sdCardPath, "images"));
+
+            //Pfad erstellen
+            string imatge = System.IO.Path.Combine(sdCardPath, "images", "image.jpg");
+
+            //Umwandeln und speichern
+            var stream = new FileStream(imatge, FileMode.Create);
+            bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
+            stream.Close();
         }
     }
 }
