@@ -113,6 +113,9 @@ namespace Magic.Droid
 			// aapt resource value: 0x7f050009
 			public const int MainButtonCameraControl = 2131034121;
 			
+			// aapt resource value: 0x7f05000c
+			public const int MainButtonGreyTest = 2131034124;
+			
 			// aapt resource value: 0x7f05000a
 			public const int MainButtonImageManipulation = 2131034122;
 			
@@ -122,14 +125,17 @@ namespace Magic.Droid
 			// aapt resource value: 0x7f050005
 			public const int ManipulationView = 2131034117;
 			
-			// aapt resource value: 0x7f05000c
-			public const int OCRTestButton1 = 2131034124;
+			// aapt resource value: 0x7f05000d
+			public const int OCRTestButton1 = 2131034125;
+			
+			// aapt resource value: 0x7f05000f
+			public const int OCRTestButton2 = 2131034127;
 			
 			// aapt resource value: 0x7f05000e
-			public const int OCRTestButton2 = 2131034126;
+			public const int OCRTestText = 2131034126;
 			
-			// aapt resource value: 0x7f05000d
-			public const int OCRTestText = 2131034125;
+			// aapt resource value: 0x7f050011
+			public const int TestGreyButton1 = 2131034129;
 			
 			// aapt resource value: 0x7f050000
 			public const int any = 2131034112;
@@ -143,8 +149,8 @@ namespace Magic.Droid
 			// aapt resource value: 0x7f050002
 			public const int front = 2131034114;
 			
-			// aapt resource value: 0x7f05000f
-			public const int surfaceView = 2131034127;
+			// aapt resource value: 0x7f050010
+			public const int surfaceView = 2131034128;
 			
 			static Id()
 			{
@@ -179,6 +185,9 @@ namespace Magic.Droid
 			
 			// aapt resource value: 0x7f030006
 			public const int Preview = 2130903046;
+			
+			// aapt resource value: 0x7f030007
+			public const int TestGrey = 2130903047;
 			
 			static Layout()
 			{

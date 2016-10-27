@@ -26,6 +26,7 @@ namespace Magic.Droid
             Button buttonControl = FindViewById<Button>(Resource.Id.MainButtonCameraControl);
             Button buttonManipulation = FindViewById<Button>(Resource.Id.MainButtonImageManipulation);
             Button buttonOCRTest = FindViewById<Button>(Resource.Id.MainButtonOCRTest);
+            Button buttonGreyTest = FindViewById<Button>(Resource.Id.MainButtonGreyTest);
 
             //Event Listeners
             buttonCam.Click += delegate 
@@ -55,6 +56,12 @@ namespace Magic.Droid
             buttonOCRTest.Click += delegate
             {
                 var intent = new Intent(this, typeof(TestOCR));
+                StartActivity(intent);
+            };
+
+            buttonGreyTest.Click += delegate
+            {
+                var intent = new Intent(this, typeof(TestGrey));
                 StartActivity(intent);
             };
         }
