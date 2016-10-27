@@ -137,6 +137,9 @@ namespace Magic.Droid
 			// aapt resource value: 0x7f050011
 			public const int TestGreyButton1 = 2131034129;
 			
+			// aapt resource value: 0x7f050012
+			public const int TestGreyView = 2131034130;
+			
 			// aapt resource value: 0x7f050000
 			public const int any = 2131034112;
 			

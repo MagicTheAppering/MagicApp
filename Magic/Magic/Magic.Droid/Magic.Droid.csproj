@@ -65,6 +65,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity1.cs" />
     <Compile Include="Examples\ImageManipulationsActivity.cs" />
     <Compile Include="Examples\CameraControlActivity.cs" />
     <Compile Include="Examples\CameraControlView.cs" />
