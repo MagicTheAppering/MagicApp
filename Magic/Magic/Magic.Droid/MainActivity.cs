@@ -6,6 +6,7 @@ using Android.OS;
 using Magic.Droid.Examples;
 using Magic.Droid.Examples.CameraControl;
 using Magic.Droid.Examples.Manipulation;
+using Magic.Droid.TestRec;
 
 namespace Magic.Droid
 {
@@ -27,6 +28,7 @@ namespace Magic.Droid
             Button buttonManipulation = FindViewById<Button>(Resource.Id.MainButtonImageManipulation);
             Button buttonOCRTest = FindViewById<Button>(Resource.Id.MainButtonOCRTest);
             Button buttonGreyTest = FindViewById<Button>(Resource.Id.MainButtonGreyTest);
+            Button buttonTestTextRec = FindViewById<Button>(Resource.Id.MainButtonTextRecTest);
 
             //Event Listeners
             buttonCam.Click += delegate 
@@ -62,6 +64,12 @@ namespace Magic.Droid
             buttonGreyTest.Click += delegate
             {
                 var intent = new Intent(this, typeof(TestGrey));
+                StartActivity(intent);
+            };
+
+            buttonTestTextRec.Click += delegate
+            {
+                var intent = new Intent(this, typeof(TestTextRec));
                 StartActivity(intent);
             };
         }

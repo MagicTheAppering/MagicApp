@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -15,58 +14,40 @@ using Android.Util;
 using OpenCV.ImgProc;
 using Size = OpenCV.Core.Size;
 using Java.Util;
-using Android.Graphics;
 using System.IO;
 using System.Threading.Tasks;
 using OpenCV.Features2d;
+using System.Collections.Generic;
 
-namespace Magic.Droid
+namespace Magic.Droid.TestRec
 {
-    [Activity(Label = "TestGrey")]
-    public class TestGrey : Activity, CameraBridgeViewBase.ICvCameraViewListener2
+    [Activity(Label = "TestTextRec")]
+    public class TestTextRec : Activity, CameraBridgeViewBase.ICvCameraViewListener2
     {
-        
-        private CameraBridgeViewBase mOpenCvCameraView;               
+
+        private CameraBridgeViewBase mOpenCvCameraView;
 
         private Mat mIntermediateMat;
 
+        private Mat mGrey, mRgba;
+
         private Callback mLoaderCallback;
 
-        private Scalar CONTOUR_COLOR = new Scalar(0, 255, 0);
+        private Scalar CONTOUR_COLOR = new Scalar(0, 255, 255);
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             //Set View
-            SetContentView(Resource.Layout.TestGrey);
+            SetContentView(Resource.Layout.TestTextRec);
 
 
             //Open CV
-            mOpenCvCameraView = FindViewById<CameraBridgeViewBase>(Resource.Id.TestGreyView);
+            mOpenCvCameraView = FindViewById<CameraBridgeViewBase>(Resource.Id.TestTextRecView);
             mOpenCvCameraView.Visibility = ViewStates.Visible;
             mOpenCvCameraView.SetCvCameraViewListener2(this);
             mLoaderCallback = new Callback(this, mOpenCvCameraView);
-
-            //Get Buttons
-            Button buttonCalc = FindViewById<Button>(Resource.Id.TestGreyButton1);
-            Button buttonDetect = FindViewById<Button>(Resource.Id.TestGreyButton2);
-
-            //Event Listeners
-            buttonCalc.Click += async delegate
-            {
-                Bitmap result = await greyImg(Resource.Drawable.test1);
-
-                byte[] imgbyte = getBytesFromBitmap(result);
-
-                showImage(imgbyte);
-            };
-
-            buttonDetect.Click += delegate
-            {
-               detectText(Resource.Drawable.test);               
-
-            };
         }
 
         protected override void OnPause()
@@ -104,7 +85,9 @@ namespace Magic.Droid
 
         public void OnCameraViewStarted(int width, int height)
         {
-            
+            mIntermediateMat = new Mat();
+            mGrey = new Mat(height, width, CvType.Cv8uc4);
+            mRgba = new Mat(height, width, CvType.Cv8uc4);
         }
 
         public void OnCameraViewStopped()
@@ -114,113 +97,23 @@ namespace Magic.Droid
                 mIntermediateMat.Release();
 
             mIntermediateMat = null;
-        }
+        }        
 
-        //Bitmap in Bytestring umwandeln
-        public byte[] getBytesFromBitmap(Bitmap img)
+
+
+        public Mat OnCameraFrame(CameraBridgeViewBase.ICvCameraViewFrame inputFrame)
         {
-            BitmapFactory.Options options = new BitmapFactory.Options
-            {
-                InJustDecodeBounds = false
-            };
+            mGrey = inputFrame.Gray();
+            mRgba = inputFrame.Rgba();
 
-
-            byte[] bitmapData;
-            using (var stream = new MemoryStream())
-            {
-                img.Compress(Bitmap.CompressFormat.Jpeg, 0, stream);
-                bitmapData = stream.ToArray();
-            }
-
-            return bitmapData;
-        }
-
-
-        public async Task<Bitmap> greyImg(int img)
-        {
-            //Bitmap laden
-            Bitmap result = await BitmapFactory.DecodeResourceAsync(Resources, img);
-
-            //Matrix für das Bild
-            Mat imgMat = new Mat();
-
-            //Bild zu Matrix umwandeln
-            Utils.BitmapToMat(result, imgMat);
-
-
-
-
-            //-----------------Bild bearbeiten---------------------
-
-            //Variablen
-            Size s = new Size(10.0, 10.0);
-            OpenCV.Core.Point p = new OpenCV.Core.Point(0, 0);
-
-            //TODO Matrix größe beachten?
-            Bitmap bmp = null;
-            Mat tmpgrey = new Mat(10,10, CvType.Cv8uc1, new Scalar(4));
-            Mat tmpblur = new Mat(10, 10, CvType.Cv8uc1, new Scalar(4));
-            Mat tmpthresh = new Mat(10, 10, CvType.Cv8uc1, new Scalar(4));
-            Mat imgresult = new Mat(10, 10, CvType.Cv8uc1, new Scalar(4));
-            try
-            {
-                //Grau
-                Imgproc.CvtColor(imgMat, tmpgrey, Imgproc.ColorBgr2gray, 4);
-
-                //Blur
-                Imgproc.Blur(tmpgrey, tmpblur, s,p);
-
-                //Thresh
-                Imgproc.Threshold(tmpblur, tmpthresh, 60, 255, Imgproc.ThreshBinary);
-
-                //Kontrast
-                //tmpthresh.ConvertTo(imgresult, -1, 9.0, 10);
-
-                bmp = Bitmap.CreateBitmap(tmpthresh.Cols(), tmpthresh.Rows(), Bitmap.Config.Argb8888);
-                Utils.MatToBitmap(tmpthresh, bmp);
-            }
-            catch (CvException e) { Console.WriteLine(""+ e.ToString()); }
-
-
-            return bmp;
-
-        }
-
-        //Image an die ImageView Activity übergeben und anzeigen
-        public void showImage(byte[] byteImg)
-        {
-            var intent = new Intent(this, typeof(ImageViewOCR));
-
-            //Bundle erzeugen und ByteArray speichern
-            Bundle b = new Bundle();
-            b.PutByteArray("img", byteImg);
-
-            //Bundle zu Intent hinzufügen
-            intent.PutExtra("img", b);
-
-            //Activity starten
-            StartActivity(intent);
+            detectText();
+            return mRgba;
         }
 
 
 
-        private async void detectText(int img)
+        private void detectText()
         {
-
-            //Bitmap laden
-            Bitmap result = await BitmapFactory.DecodeResourceAsync(Resources, img);
-
-            Bitmap resultgrey = await greyImg(img);
-
-            //Matrix für die Bilder
-            Mat mGrey = new Mat();
-            Mat mRGB = new Mat();
-
-            //Bild zu Matrix umwandeln
-            Utils.BitmapToMat(result, mGrey);
-            Utils.BitmapToMat(result, mRGB);
-
-
             MatOfKeyPoint keypoint = new MatOfKeyPoint();
             //IList oder List?
             IList<KeyPoint> listpoint;
@@ -240,13 +133,13 @@ namespace Magic.Droid
             Mat morbyte = new Mat();
             Mat hierarchy = new Mat();
 
-            OpenCV.Core.Rect rectan3;
+            Rect rectan3;
             //
             FeatureDetector detector = FeatureDetector
                     .Create(FeatureDetector.Mser);
             detector.Detect(mGrey, keypoint);
             listpoint = keypoint.ToList();
-
+            
             //Counter?
             for (int ind = 0; ind < listpoint.Count; ind++)
             {
@@ -263,7 +156,7 @@ namespace Magic.Droid
                     rectanx2 = mGrey.Width() - rectanx1;
                 if ((rectany1 + rectany2) > mGrey.Height())
                     rectany2 = mGrey.Height() - rectany1;
-                OpenCV.Core.Rect rectant = new OpenCV.Core.Rect(rectanx1, rectany1, rectanx2, rectany2);
+                Rect rectant = new Rect(rectanx1, rectany1, rectanx2, rectany2);
                 try
                 {
                     Mat roi = new Mat(mask, rectant);
@@ -290,46 +183,19 @@ namespace Magic.Droid
 
                 }
                 else
-                    //Sicher mgrey?
-                    Imgproc.Rectangle(mRGB, rectan3.Br(), rectan3.Tl(),
+                    Imgproc.Rectangle(mRgba, rectan3.Br(), rectan3.Tl(),
                             CONTOUR_COLOR);
             }
-
-            Bitmap resultrgb;
-            resultrgb = Bitmap.CreateBitmap(mRGB.Cols(), mRGB.Rows(), Bitmap.Config.Argb8888);
-            Utils.MatToBitmap(mRGB, resultrgb);
-
-
-
-            showImage(getBytesFromBitmap(resultrgb));
         }
 
 
 
-        public Mat OnCameraFrame(CameraBridgeViewBase.ICvCameraViewFrame inputFrame)
-        {
-            Mat rgba = inputFrame.Rgba();
-            //Size sizeRgba = rgba.Size();
-
-            //int rows = (int)sizeRgba.Height;
-            //int cols = (int)sizeRgba.Width;
-
-            //int left = cols / 8;
-            //int top = rows / 8;
-
-            //int width = cols * 3 / 4;
-            //int height = rows * 3 / 4;
-
-            
-
-            return rgba;
-        }
     }
 
     class Callback : BaseLoaderCallback
     {
         private readonly CameraBridgeViewBase mOpenCvCameraView;
-        public Callback(Context context, CameraBridgeViewBase cameraView): base(context)
+        public Callback(Context context, CameraBridgeViewBase cameraView) : base(context)
         {
             mOpenCvCameraView = cameraView;
         }

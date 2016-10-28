@@ -83,7 +83,10 @@ namespace Magic.Droid
 			public const int testAE = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int testText = 2130837514;
+			public const int testbig = 2130837514;
+			
+			// aapt resource value: 0x7f02000b
+			public const int testText = 2130837515;
 			
 			static Drawable()
 			{
@@ -122,23 +125,32 @@ namespace Magic.Droid
 			// aapt resource value: 0x7f05000b
 			public const int MainButtonOCRTest = 2131034123;
 			
+			// aapt resource value: 0x7f05000d
+			public const int MainButtonTextRecTest = 2131034125;
+			
 			// aapt resource value: 0x7f050005
 			public const int ManipulationView = 2131034117;
 			
-			// aapt resource value: 0x7f05000d
-			public const int OCRTestButton1 = 2131034125;
+			// aapt resource value: 0x7f05000e
+			public const int OCRTestButton1 = 2131034126;
+			
+			// aapt resource value: 0x7f050010
+			public const int OCRTestButton2 = 2131034128;
 			
 			// aapt resource value: 0x7f05000f
-			public const int OCRTestButton2 = 2131034127;
-			
-			// aapt resource value: 0x7f05000e
-			public const int OCRTestText = 2131034126;
-			
-			// aapt resource value: 0x7f050011
-			public const int TestGreyButton1 = 2131034129;
+			public const int OCRTestText = 2131034127;
 			
 			// aapt resource value: 0x7f050012
-			public const int TestGreyView = 2131034130;
+			public const int TestGreyButton1 = 2131034130;
+			
+			// aapt resource value: 0x7f050013
+			public const int TestGreyButton2 = 2131034131;
+			
+			// aapt resource value: 0x7f050014
+			public const int TestGreyView = 2131034132;
+			
+			// aapt resource value: 0x7f050015
+			public const int TestTextRecView = 2131034133;
 			
 			// aapt resource value: 0x7f050000
 			public const int any = 2131034112;
@@ -152,8 +164,8 @@ namespace Magic.Droid
 			// aapt resource value: 0x7f050002
 			public const int front = 2131034114;
 			
-			// aapt resource value: 0x7f050010
-			public const int surfaceView = 2131034128;
+			// aapt resource value: 0x7f050011
+			public const int surfaceView = 2131034129;
 			
 			static Id()
 			{
@@ -191,6 +203,9 @@ namespace Magic.Droid
 			
 			// aapt resource value: 0x7f030007
 			public const int TestGrey = 2130903047;
+			
+			// aapt resource value: 0x7f030008
+			public const int TestTextRec = 2130903048;
 			
 			static Layout()
 			{
