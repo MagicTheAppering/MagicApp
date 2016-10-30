@@ -53,40 +53,43 @@ namespace Magic.Droid
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int hello = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int test = 2130837505;
+			public const int Icon = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int test1 = 2130837506;
+			public const int test = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int test2 = 2130837507;
+			public const int test1 = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int test3 = 2130837508;
+			public const int test2 = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int test4 = 2130837509;
+			public const int test3 = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int test_kontrast_high = 2130837510;
+			public const int test4 = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int test_kontrast_low = 2130837511;
+			public const int test_kontrast_high = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int test_kontrast_mittel = 2130837512;
+			public const int test_kontrast_low = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int testAE = 2130837513;
+			public const int test_kontrast_mittel = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int testbig = 2130837514;
+			public const int testAE = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int testText = 2130837515;
+			public const int testbig = 2130837515;
+			
+			// aapt resource value: 0x7f02000c
+			public const int testText = 2130837516;
 			
 			static Drawable()
 			{

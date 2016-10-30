@@ -155,5 +155,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\testbig.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\hello.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
 </Project>
