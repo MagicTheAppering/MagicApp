@@ -32,7 +32,7 @@ namespace Magic.Droid
 
         private Callback mLoaderCallback;
 
-        private Scalar CONTOUR_COLOR = new Scalar(0, 255, 0);
+        private Scalar CONTOUR_COLOR = new Scalar(0, 255, 255, 0);
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -64,7 +64,7 @@ namespace Magic.Droid
 
             buttonDetect.Click += delegate
             {
-               detectText(Resource.Drawable.test);               
+               detectTextNew(Resource.Drawable.testText);               
 
             };
         }
@@ -147,9 +147,6 @@ namespace Magic.Droid
             //Bild zu Matrix umwandeln
             Utils.BitmapToMat(result, imgMat);
 
-
-
-
             //-----------------Bild bearbeiten---------------------
 
             //Variablen
@@ -206,7 +203,6 @@ namespace Magic.Droid
 
         private async void detectText(int img)
         {
-
             //Bitmap laden
             Bitmap result = await BitmapFactory.DecodeResourceAsync(Resources, img);
 
@@ -217,7 +213,7 @@ namespace Magic.Droid
             Mat mRGB = new Mat();
 
             //Bild zu Matrix umwandeln
-            Utils.BitmapToMat(result, mGrey);
+            Utils.BitmapToMat(resultgrey, mGrey);
             Utils.BitmapToMat(result, mRGB);
 
 
@@ -290,14 +286,67 @@ namespace Magic.Droid
 
                 }
                 else
-                    //Sicher mgrey?
-                    Imgproc.Rectangle(mRGB, rectan3.Br(), rectan3.Tl(),
-                            CONTOUR_COLOR);
+                    Imgproc.Rectangle(mRGB, rectan3.Br(), rectan3.Tl(), CONTOUR_COLOR);
             }
 
             Bitmap resultrgb;
             resultrgb = Bitmap.CreateBitmap(mRGB.Cols(), mRGB.Rows(), Bitmap.Config.Argb8888);
             Utils.MatToBitmap(mRGB, resultrgb);
+
+            showImage(getBytesFromBitmap(resultrgb));
+        }
+
+        public async void detectTextNew(int img)
+        {
+            //Bitmap laden
+            Bitmap result = await BitmapFactory.DecodeResourceAsync(Resources, img);
+
+
+            //Matrix für die Bilder
+            Mat large = new Mat();
+            Mat small = new Mat();
+            Mat rgb = new Mat();
+
+            //Bild zu Matrix umwandeln
+            Utils.BitmapToMat(result, large);
+
+            // downsample and use it for processing
+            Imgproc.PyrDown(large, rgb);
+
+            //Grey
+            Imgproc.CvtColor(rgb, small, Imgproc.ColorBgr2gray);
+
+            //Gradiant
+            Mat grad = new Mat();
+            Size morphsize = new Size(3.0, 3.0);
+            Mat morphKernel = Imgproc.GetStructuringElement(Imgproc.MorphEllipse, morphsize);
+
+            Imgproc.MorphologyEx(small, grad, Imgproc.MorphGradient, morphKernel);
+
+            //Binarize
+            Mat bw = new Mat();
+
+            Imgproc.Threshold(grad, bw, 0.0, 255.0, Imgproc.ThreshBinary | Imgproc.ThreshOtsu);
+
+            // connect horizontally oriented regions
+            Mat connected = new Mat();
+            Size connectsize = new Size(9.0, 1.0);
+            morphKernel = Imgproc.GetStructuringElement(Imgproc.MorphRect, connectsize);
+            Imgproc.MorphologyEx(bw, connected, Imgproc.MorphClose, morphKernel);
+
+            // find contours
+            Mat mask = Mat.Zeros(bw.Size(), CvType.Cv8uc1);
+            //vector<vector<Point>> contours;
+            //vector<Vec4i> hierarchy;
+            //findContours(connected, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+            // filter contours
+
+
+
+
+            Bitmap resultrgb;
+            resultrgb = Bitmap.CreateBitmap(connected.Cols(), connected.Rows(), Bitmap.Config.Argb8888);
+            Utils.MatToBitmap(connected, resultrgb);
 
 
 
