@@ -336,17 +336,60 @@ namespace Magic.Droid
 
             // find contours
             Mat mask = Mat.Zeros(bw.Size(), CvType.Cv8uc1);
-            //vector<vector<Point>> contours;
-            //vector<Vec4i> hierarchy;
-            //findContours(connected, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
-            // filter contours
 
+            JavaList<MatOfPoint> contours = new JavaList<MatOfPoint>();
+            Mat hierarchy = new Mat();
 
+            OpenCV.Core.Point contourPoint = new OpenCV.Core.Point(0, 0);
+
+            Imgproc.FindContours(connected, contours, hierarchy, Imgproc.RetrCcomp, Imgproc.ChainApproxSimple, contourPoint);
+
+            Scalar zero = new Scalar(0, 0, 0);
+            Scalar contourscal = new Scalar(255, 255, 255);
+
+            Scalar rectScalar = new Scalar(0, 255, 0);
+
+            //filter contours
+            //Wirklich über contour laufen?
+            //for (int i = 0; i < contours.Count; i++)
+            //Console.WriteLine(contours.Count);
+            //for (int i = 0; i >= 0; i = Convert.ToInt32(hierarchy.Get(i, 0)))
+            //for (int i = 0; i < contours.Count; i++)
+            for (int i = 0; i >= 0;)
+            {
+                OpenCV.Core.Rect rect = Imgproc.BoundingRect(contours[i]);
+
+                Mat maskROI = new Mat(mask,rect);
+                maskROI.SetTo(zero);
+
+                //fill the contour
+                                                                    //Core Filled?
+                Imgproc.DrawContours(mask, contours, i, contourscal, Core.Filled);
+
+                // ratio of non-zero pixels in the filled region
+                double r = (double)Core.CountNonZero(maskROI) / (rect.Width * rect.Height);
+
+                /* assume at least 45% of the area is filled if it contains text */
+                /* constraints on region size */
+                /* these two conditions alone are not very robust. better to use something 
+                like the number of significant peaks in a horizontal projection as a third condition */
+
+                if (r > .45  && (rect.Height > 8 && rect.Width > 8))
+                {
+                    Imgproc.Rectangle(rgb, rect.Br(), rect.Tl(), rectScalar, 2);
+                }
+
+                double[] contourInfo = hierarchy.Get(0, i);
+                i = (int)contourInfo[0]; // this gives next sibling
+
+                Console.WriteLine("---------------------durchlauf" + r); 
+
+            }
 
 
             Bitmap resultrgb;
-            resultrgb = Bitmap.CreateBitmap(connected.Cols(), connected.Rows(), Bitmap.Config.Argb8888);
-            Utils.MatToBitmap(connected, resultrgb);
+            resultrgb = Bitmap.CreateBitmap(rgb.Cols(), rgb.Rows(), Bitmap.Config.Argb8888);
+            Utils.MatToBitmap(rgb, resultrgb);
 
 
 
