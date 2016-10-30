@@ -38,9 +38,8 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenCV, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Desktop\OpenCV\armeabi-v7a\OpenCV.dll</HintPath>
+    <Reference Include="OpenCV">
+      <HintPath>D:\Downloads\armeabi-v7a\OpenCV.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -82,6 +81,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\tessdata\deu.traineddata" />
     <AndroidAsset Include="Assets\tessdata\eng.traineddata" />
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
