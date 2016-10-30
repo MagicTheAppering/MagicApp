@@ -20,6 +20,8 @@ using System.IO;
 using System.Threading.Tasks;
 using OpenCV.Features2d;
 using Tesseract.Droid;
+using Magic.Shared.imgop;
+using Magic.Shared.magicocr;
 
 namespace Magic.Droid
 {
@@ -67,9 +69,17 @@ namespace Magic.Droid
                 showImage(imgbyte);
             };
 
-            buttonDetect.Click += delegate
+            buttonDetect.Click += async delegate
             {
-                detectTextWorking(Resource.Drawable.test4);
+                int img = Resource.Drawable.test1;
+                Bitmap result = await BitmapFactory.DecodeResourceAsync(Resources, img);
+
+                string text = await ImageOp.detectAndExtractText(result);
+
+                //showImage(ImageOp.getBytesFromBitmap(text));
+
+                //Console.WriteLine("Ergebnis: " + text);
+                //detectTextAndOCR(Resource.Drawable.test3);
 
             };
 
@@ -77,7 +87,7 @@ namespace Magic.Droid
             api = new TesseractApi(this, AssetsDeployment.OncePerVersion);
 
             //Warten auf initialisierung
-            bool check = await initTes();
+            bool check = await OCR.initTes(api);
         }
 
         //Api starten und Trainingsdaten laden
@@ -181,10 +191,10 @@ namespace Magic.Droid
                 Imgproc.CvtColor(imgMat, tmpgrey, Imgproc.ColorBgr2gray, 4);
 
                 //Blur
-                //Imgproc.Blur(tmpgrey, tmpblur, s,p);
+                Imgproc.Blur(tmpgrey, tmpblur, s,p);
 
                 //Thresh
-                Imgproc.Threshold(tmpgrey, tmpthresh, 90, 255, Imgproc.ThreshBinary);
+                Imgproc.Threshold(tmpblur, tmpthresh, 90, 255, Imgproc.ThreshBinary);
 
                 //Kontrast
                 //tmpthresh.ConvertTo(imgresult, -1, 9.0, 10);
@@ -510,34 +520,7 @@ namespace Magic.Droid
             return img1;
         }
 
-    }
-
-    class Callback : BaseLoaderCallback
-    {
-        private readonly CameraBridgeViewBase mOpenCvCameraView;
-        public Callback(Context context, CameraBridgeViewBase cameraView): base(context)
-        {
-            mOpenCvCameraView = cameraView;
-        }
-
-        public override void OnManagerConnected(int status)
-        {
-            switch (status)
-            {
-                case LoaderCallbackInterface.Success:
-                    {
-                        Log.Info("Bla", "OpenCV loaded successfully");
-                        mOpenCvCameraView.EnableView();
-                    }
-                    break;
-                default:
-                    {
-                        base.OnManagerConnected(status);
-                    }
-                    break;
-            }
-        }
-    }
+    }  
 
 
 

@@ -64,6 +64,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Callback.cs" />
+    <Compile Include="ImageOP.cs" />
+    <Compile Include="MagicOCR.cs" />
     <Compile Include="TestTextRec.cs" />
     <Compile Include="Examples\ImageManipulationsActivity.cs" />
     <Compile Include="Examples\CameraControlActivity.cs" />
