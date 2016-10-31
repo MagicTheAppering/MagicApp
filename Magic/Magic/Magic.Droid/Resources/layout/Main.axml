@@ -39,8 +39,12 @@
         android:layout_height="wrap_content"
         android:text="Text Rec Test" />
     <Button
-       android:id="@+id/MainButtonSelectImageGallery"
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       android:text="Pick an image from the gallery"/>
+        android:id="@+id/MainButtonSelectImageGallery"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Pick an image from the gallery" />
+  <Button
+        android:id="@+id/MainButtonTestArea"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

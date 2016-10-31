@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <Button
+    android:id="@+id/TestAreaSelectImageGallery"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="Pick an image from the gallery" />
+  <ImageView
+    android:id="@+id/TestAreaImageView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+  <SeekBar
+    android:id="@+id/TestAreaSeekBar1"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    />
+  <TextView
+    android:id="@+id/TestAreaTextView"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    />
+</LinearLayout>

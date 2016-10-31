@@ -30,6 +30,7 @@ namespace Magic.Droid
             Button buttonGreyTest = FindViewById<Button>(Resource.Id.MainButtonGreyTest);
             Button buttonTestTextRec = FindViewById<Button>(Resource.Id.MainButtonTextRecTest);
             Button buttonSelectImageGallery = FindViewById<Button>(Resource.Id.MainButtonSelectImageGallery);
+            Button buttonTestArea = FindViewById<Button>(Resource.Id.MainButtonTestArea);
 
             //Event Listeners
             buttonCam.Click += delegate 
@@ -79,6 +80,12 @@ namespace Magic.Droid
                  var intent = new Intent(this, typeof(SelectGalleryImage));
                  StartActivity(intent);
              };
+
+            buttonTestArea.Click += delegate
+            {
+                var intent = new Intent(this, typeof(TestArea));
+                StartActivity(intent);
+            };
         }
 	}
 }
