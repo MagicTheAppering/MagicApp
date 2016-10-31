@@ -67,6 +67,7 @@
     <Compile Include="Callback.cs" />
     <Compile Include="ImageOP.cs" />
     <Compile Include="MagicOCR.cs" />
+    <Compile Include="SelectGalleryImage.cs" />
     <Compile Include="TestTextRec.cs" />
     <Compile Include="Examples\ImageManipulationsActivity.cs" />
     <Compile Include="Examples\CameraControlActivity.cs" />
@@ -111,6 +112,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\TestTextRec.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SelectGalleryImage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
