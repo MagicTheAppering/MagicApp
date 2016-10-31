@@ -60,31 +60,34 @@
     android:text="Grey"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
+
+
+  <ImageView
+    android:id="@+id/TestAreaImageResultGrey"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+  
+  
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">  
-    
     
     <Button
     android:id="@+id/TestAreaButtonExtractText"
     android:text="Get Text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
+    
     <Button
     android:id="@+id/TestAreaButtonDetectText"
     android:text="Detect Text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
 
-
-  
   </LinearLayout>
 
-  <ImageView
-    android:id="@+id/TestAreaImageResult"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+  
   
  
   

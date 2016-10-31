@@ -94,7 +94,7 @@ namespace Magic.Shared.imgop
                 //Thresh
                 Imgproc.Threshold(tmpblur, tmpthresh, 90, 255, Imgproc.ThreshBinary);
 
-                //Kontrast
+                            //Kontrast
                 //tmpthresh.ConvertTo(imgresult, -1, 9.0, 10);
 
                 bmp = Bitmap.CreateBitmap(tmpthresh.Cols(), tmpthresh.Rows(), Bitmap.Config.Argb8888);

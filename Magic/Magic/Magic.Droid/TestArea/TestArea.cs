@@ -22,6 +22,7 @@ using OpenCV.Features2d;
 using Tesseract.Droid;
 using Magic.Shared.imgop;
 using Magic.Shared.magicocr;
+using Android.Graphics.Drawables;
 
 namespace Magic.Droid
 {
@@ -73,25 +74,28 @@ namespace Magic.Droid
 
             //ImageView
             img1 = FindViewById<ImageView>(Resource.Id.TestAreaImageView);
-            imgResult = FindViewById<ImageView>(Resource.Id.TestAreaImageResult);
+            imgResult = FindViewById<ImageView>(Resource.Id.TestAreaImageResultGrey);
 
             //Event Listeners         
-            buttonDetectText.Click += async delegate
-            {                
-                int img = Resource.Drawable.test2;
-                Bitmap result = await BitmapFactory.DecodeResourceAsync(Resources, img);
+            
 
-                string text = await ImageOp.detectAndExtractText(result);
-                Console.WriteLine("Ergebnis: " + text);                          
-
-            };
-
-            buttonGrey.Click += async delegate
+            buttonGrey.Click += delegate
             {
-                
+                Bitmap img = ((BitmapDrawable)img1.Drawable).Bitmap;
+                Bitmap result = ImageOp.greyImg(img);
+
+                imgResult.SetImageBitmap(result);
             };
 
-            buttonExtractText.Click += async delegate
+            buttonDetectText.Click += delegate
+            {
+                Bitmap img = ((BitmapDrawable)img1.Drawable).Bitmap;
+                Bitmap result = ImageOp.greyImg(img);
+
+                imgResult.SetImageBitmap(result);
+            };
+
+            buttonExtractText.Click += delegate
             {
 
             };

@@ -134,17 +134,17 @@ namespace Magic.Droid
 			// aapt resource value: 0x7f050005
 			public const int ManipulationView = 2131034117;
 			
-			// aapt resource value: 0x7f050018
-			public const int TestAreaButtonDetectText = 2131034136;
+			// aapt resource value: 0x7f050019
+			public const int TestAreaButtonDetectText = 2131034137;
 			
-			// aapt resource value: 0x7f050017
-			public const int TestAreaButtonExtractText = 2131034135;
+			// aapt resource value: 0x7f050018
+			public const int TestAreaButtonExtractText = 2131034136;
 			
 			// aapt resource value: 0x7f050016
 			public const int TestAreaButtonGrey = 2131034134;
 			
-			// aapt resource value: 0x7f050019
-			public const int TestAreaImageResult = 2131034137;
+			// aapt resource value: 0x7f050017
+			public const int TestAreaImageResultGrey = 2131034135;
 			
 			// aapt resource value: 0x7f050011
 			public const int TestAreaImageView = 2131034129;
