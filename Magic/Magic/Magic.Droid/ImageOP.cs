@@ -63,7 +63,7 @@ namespace Magic.Shared.imgop
         /// </summary>
         /// <param name="img"></param>
         /// <returns></returns>
-        public static Bitmap greyImg(Bitmap img)
+        public static Bitmap greyImg(Bitmap img, double threshValue1, double blurValue)
         {
             //Matrix für das Bild
             Mat imgMat = new Mat();
@@ -74,7 +74,8 @@ namespace Magic.Shared.imgop
             //-----------------Bild bearbeiten---------------------
 
             //Variablen
-            Size s = new Size(10.0, 10.0);
+            //Size s = new Size(10.0, 10.0);
+            Size s = new Size(blurValue, blurValue);
             OpenCV.Core.Point p = new OpenCV.Core.Point(0, 0);
 
             //TODO Matrix größe beachten?
@@ -92,7 +93,9 @@ namespace Magic.Shared.imgop
                 Imgproc.Blur(tmpgrey, tmpblur, s, p);
 
                 //Thresh
-                Imgproc.Threshold(tmpblur, tmpthresh, 90, 255, Imgproc.ThreshBinary);
+                //Orginal 
+                //Imgproc.Threshold(tmpblur, tmpthresh, 90, 255, Imgproc.ThreshBinary);
+                Imgproc.Threshold(tmpblur, tmpthresh, threshValue1, 255, Imgproc.ThreshBinary);
 
                             //Kontrast
                 //tmpthresh.ConvertTo(imgresult, -1, 9.0, 10);
@@ -115,7 +118,7 @@ namespace Magic.Shared.imgop
         /// <param name="width">Old Size * width</param>
         /// <param name="heigth">Old Size * height</param>
         /// <returns>resized image</returns>
-        public static Bitmap resizeImage(Bitmap img, int width, int heigth)
+        public static Bitmap resizeImage(Bitmap img, double width, double heigth)
         {
             //Matrix für das Bild
             Mat src = new Mat();
@@ -320,8 +323,7 @@ namespace Magic.Shared.imgop
                 {
                     //Imgproc.Rectangle(rgb, rect.Br(), rect.Tl(), rectScalar, 2);
                     try
-                    {
-                        
+                    {                        
                         croppedPart = rgb.Submat(rect);
 
                         bmpOcr = Bitmap.CreateBitmap(croppedPart.Width(), croppedPart.Height(), Bitmap.Config.Argb8888);

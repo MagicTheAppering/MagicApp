@@ -33,8 +33,8 @@ namespace Magic.Shared.magicocr
             {
                 string textResult = "";
 
-                Bitmap grey = ImageOp.greyImg(img);
-                byte[] greyByte = ImageOp.getBytesFromBitmap(grey);
+                
+                byte[] greyByte = ImageOp.getBytesFromBitmap(img);
 
                 bool success = await api.SetImage(greyByte);
                 if (success)

@@ -39,13 +39,13 @@ namespace Magic.Droid
         private TesseractApi api;
 
 
-        private TextView textseek1, textseek2;
+        private TextView textseekThresh, textseekBlur, textseekSize, textResult;
 
-        private Button buttonSelectImageGallery, buttonDetectText, buttonGrey, buttonExtractText;
+        private Button buttonSelectImageGallery, buttonDetectText, buttonGrey, buttonExtractText, buttonSize;
 
-        private SeekBar seek1, seek2;
+        private SeekBar seekThresh, seekBlur, seekSize;
 
-        private ImageView img1, imgResult;
+        private ImageView imgInput, imgResult;
 
 
         protected override async void OnCreate(Bundle savedInstanceState)
@@ -63,17 +63,20 @@ namespace Magic.Droid
             mLoaderCallback = new Callback(this, mOpenCvCameraView);
 
             //Textview
-            textseek1 = FindViewById<TextView>(Resource.Id.TestAreaTextSeek1);
-            textseek2 = FindViewById<TextView>(Resource.Id.TestAreaTextSeek2);
-
+            textseekThresh = FindViewById<TextView>(Resource.Id.TestAreaTextSeek1);
+            textseekBlur = FindViewById<TextView>(Resource.Id.TestAreaTextSeek2);
+            textseekSize = FindViewById<TextView>(Resource.Id.TestAreaTextSeek3);
+            textResult = FindViewById<TextView>(Resource.Id.TestAreaResultText);
+            
             //Get Buttons
             buttonDetectText = FindViewById<Button>(Resource.Id.TestAreaButtonDetectText);
             buttonSelectImageGallery = FindViewById<Button>(Resource.Id.TestAreaSelectImageGallery);
             buttonExtractText = FindViewById<Button>(Resource.Id.TestAreaButtonExtractText);
             buttonGrey = FindViewById<Button>(Resource.Id.TestAreaButtonGrey);
+            buttonSize = FindViewById<Button>(Resource.Id.TestAreaButtonSize);
 
             //ImageView
-            img1 = FindViewById<ImageView>(Resource.Id.TestAreaImageView);
+            imgInput = FindViewById<ImageView>(Resource.Id.TestAreaImageView);
             imgResult = FindViewById<ImageView>(Resource.Id.TestAreaImageResultGrey);
 
             //Event Listeners         
@@ -81,23 +84,42 @@ namespace Magic.Droid
 
             buttonGrey.Click += delegate
             {
-                Bitmap img = ((BitmapDrawable)img1.Drawable).Bitmap;
-                Bitmap result = ImageOp.greyImg(img);
+                Bitmap img = ((BitmapDrawable)imgInput.Drawable).Bitmap;
+                double thresh = Convert.ToDouble(textseekThresh.Text.ToString());
+                double blur = Convert.ToDouble(textseekBlur.Text.ToString());
+                Bitmap result = ImageOp.greyImg(img, thresh, blur);
 
                 imgResult.SetImageBitmap(result);
             };
 
             buttonDetectText.Click += delegate
             {
-                Bitmap img = ((BitmapDrawable)img1.Drawable).Bitmap;
-                Bitmap result = ImageOp.greyImg(img);
+                Bitmap img = ((BitmapDrawable)imgResult.Drawable).Bitmap;
+
+                Bitmap result = ImageOp.detectTextRect(img);
 
                 imgResult.SetImageBitmap(result);
             };
 
-            buttonExtractText.Click += delegate
-            {
 
+            buttonExtractText.Click += async delegate
+            {
+                Bitmap img = ((BitmapDrawable)imgResult.Drawable).Bitmap;
+
+                string result = await ImageOp.detectAndExtractText(img);
+
+                textResult.Text = result;
+            };
+
+            buttonSize.Click += delegate
+            {
+                Bitmap img = ((BitmapDrawable)imgInput.Drawable).Bitmap;
+                double size = Convert.ToDouble(textseekSize.Text.ToString());
+                size = size / 100;
+                Bitmap imgTemp = ImageOp.resizeImage(img, size, size);
+                //Bitmap result = ImageOp.greyImg(imgTemp);
+
+                imgResult.SetImageBitmap(imgTemp);
             };
 
 
@@ -112,23 +134,33 @@ namespace Magic.Droid
 
 
             //Slider
-            seek1 = FindViewById<SeekBar>(Resource.Id.TestAreaSeekBar1);
-            seek2 = FindViewById<SeekBar>(Resource.Id.TestAreaSeekBar2);
+            seekThresh = FindViewById<SeekBar>(Resource.Id.TestAreaSeekBar1);
+            seekBlur = FindViewById<SeekBar>(Resource.Id.TestAreaSeekBar2);
+            seekSize = FindViewById<SeekBar>(Resource.Id.TestAreaSeekBar3);
 
             //Slider Listener
-            seek1.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) =>
+            seekThresh.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) =>
             {
                 if (e.FromUser)
                 {
-                    textseek1.Text = string.Format("Value " + e.Progress);
+                   
+                    textseekThresh.Text = string.Format("" + e.Progress);
                 }
             };
 
-            seek2.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) =>
+            seekBlur.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) =>
             {
                 if (e.FromUser)
                 {
-                    textseek2.Text = string.Format("Value " + e.Progress);
+                    textseekBlur.Text = string.Format("" + e.Progress);
+                }
+            };
+
+            seekSize.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) =>
+            {
+                if (e.FromUser)
+                {
+                    textseekSize.Text = string.Format("" + e.Progress);
                 }
             };
 
@@ -144,7 +176,7 @@ namespace Magic.Droid
 
             if (resultCode == Result.Ok)
             {
-                img1.SetImageURI(data.Data);
+                imgInput.SetImageURI(data.Data);
             }
         }
 
