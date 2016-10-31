@@ -14,7 +14,7 @@ using Android.Graphics;
 namespace Magic.Droid
 {
     [Activity(Label = "ImageViewOCR")]
-    public class ImageViewOCR : Activity
+    public class ImgPreview : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -26,10 +26,10 @@ namespace Magic.Droid
             byte[] imgbyte = b.GetByteArray("img");
 
             //Layout
-            SetContentView(Resource.Layout.ImageViewOCR);
+            SetContentView(Resource.Layout.ImgPreview);
 
             //ImageView
-            ImageView img = FindViewById<ImageView>(Resource.Id.ImageViewOCRView);
+            ImageView img = FindViewById<ImageView>(Resource.Id.imgview);
 
 
             //ByteArray zu Image umwandeln

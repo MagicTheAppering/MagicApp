@@ -24,27 +24,13 @@
         android:layout_height="wrap_content"
         android:text="Img Manipulation" />
     <Button
-        android:id="@+id/MainButtonOCRTest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="OCR Test" />
-    <Button
         android:id="@+id/MainButtonGreyTest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Grey Test" />
-    <Button
-        android:id="@+id/MainButtonTextRecTest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text Rec Test" />
+        android:text="Test Area" />
     <Button
         android:id="@+id/MainButtonSelectImageGallery"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Pick an image from the gallery" />
-  <Button
-        android:id="@+id/MainButtonTestArea"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>

@@ -3,24 +3,95 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
   <Button
     android:id="@+id/TestAreaSelectImageGallery"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Pick an image from the gallery" />
+    android:text="Pick Image" />
   <ImageView
     android:id="@+id/TestAreaImageView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="100">
+    <TextView
+    android:layout_height="wrap_content"
+    android:layout_width="0dp"
+    android:text="Thresh:"
+    android:layout_weight="30" />
+    <SeekBar
+  android:id="@+id/TestAreaSeekBar1"
+  android:layout_height="wrap_content"
+  android:layout_width="0dp"
+  android:layout_weight="70"/>
+  </LinearLayout>
+  <TextView
+      android:id="@+id/TestAreaTextSeek1"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="100">
+    <TextView
+    android:layout_height="wrap_content"
+    android:layout_width="0dp"
+    android:text="Blur:"
+    android:layout_weight="30" />
+    <SeekBar
+  android:id="@+id/TestAreaSeekBar2"
+  android:layout_height="wrap_content"
+  android:layout_width="0dp"
+  android:layout_weight="70"/>
+  </LinearLayout>
+  <TextView
+     android:id="@+id/TestAreaTextSeek2"
+     android:layout_height="wrap_content"
+     android:layout_width="wrap_content" />
+  
+  
+  <Button
+    android:id="@+id/TestAreaButtonGrey"
+    android:text="Grey"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
-  <SeekBar
-    android:id="@+id/TestAreaSeekBar1"
+  <LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_width="fill_parent"
-    />
-  <TextView
-    android:id="@+id/TestAreaTextView"
-    android:layout_height="wrap_content"
+    android:orientation="horizontal">  
+    
+    
+    <Button
+    android:id="@+id/TestAreaButtonExtractText"
+    android:text="Get Text"
     android:layout_width="wrap_content"
-    />
+    android:layout_height="wrap_content" />
+    <Button
+    android:id="@+id/TestAreaButtonDetectText"
+    android:text="Detect Text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+
+  
+  </LinearLayout>
+
+  <ImageView
+    android:id="@+id/TestAreaImageResult"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+  
+ 
+  
+  
+  <org.opencv.android.JavaCameraView
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/TestGreyView" />
+
 </LinearLayout>

@@ -353,5 +353,134 @@ namespace Magic.Shared.imgop
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //----------------------------Old Stuff-------------------------
+
+
+        //private async void detectText(int img)
+        //{
+        //    //Bitmap laden
+        //    Bitmap result = await BitmapFactory.DecodeResourceAsync(Resources, img);
+
+        //    Bitmap resultgrey = await greyImg(img);
+
+        //    //Matrix für die Bilder
+        //    Mat mGrey = new Mat();
+        //    Mat mRGB = new Mat();
+
+        //    //Bild zu Matrix umwandeln
+        //    Utils.BitmapToMat(resultgrey, mGrey);
+        //    Utils.BitmapToMat(result, mRGB);
+
+
+        //    MatOfKeyPoint keypoint = new MatOfKeyPoint();
+        //    //IList oder List?
+        //    IList<KeyPoint> listpoint;
+        //    KeyPoint kpoint;
+        //    //Cvtype richtig?
+        //    Mat mask = Mat.Zeros(mGrey.Size(), CvType.Cv8uc1);
+        //    int rectanx1;
+        //    int rectany1;
+        //    int rectanx2;
+        //    int rectany2;
+        //    int imgsize = mGrey.Height() * mGrey.Width();
+        //    Scalar zeos = new Scalar(0, 0, 0);
+
+        //    List<MatOfPoint> contour2 = new List<MatOfPoint>();
+        //    //CvType?
+        //    Mat kernel = new Mat(1, 50, CvType.Cv8uc1, Scalar.All(255));
+        //    Mat morbyte = new Mat();
+        //    Mat hierarchy = new Mat();
+
+        //    OpenCV.Core.Rect rectan3;
+        //    //
+        //    FeatureDetector detector = FeatureDetector
+        //            .Create(FeatureDetector.Mser);
+        //    detector.Detect(mGrey, keypoint);
+        //    listpoint = keypoint.ToList();
+
+        //    //Counter?
+        //    for (int ind = 0; ind < listpoint.Count; ind++)
+        //    {
+        //        kpoint = listpoint[ind];
+        //        rectanx1 = (int)(kpoint.Pt.X - 0.5 * kpoint.Size);
+        //        rectany1 = (int)(kpoint.Pt.Y - 0.5 * kpoint.Size);
+        //        rectanx2 = (int)(kpoint.Size);
+        //        rectany2 = (int)(kpoint.Size);
+        //        if (rectanx1 <= 0)
+        //            rectanx1 = 1;
+        //        if (rectany1 <= 0)
+        //            rectany1 = 1;
+        //        if ((rectanx1 + rectanx2) > mGrey.Width())
+        //            rectanx2 = mGrey.Width() - rectanx1;
+        //        if ((rectany1 + rectany2) > mGrey.Height())
+        //            rectany2 = mGrey.Height() - rectany1;
+        //        OpenCV.Core.Rect rectant = new OpenCV.Core.Rect(rectanx1, rectany1, rectanx2, rectany2);
+        //        try
+        //        {
+        //            Mat roi = new Mat(mask, rectant);
+        //            roi.SetTo(CONTOUR_COLOR);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Log.Debug("mylog", "mat roi error " + ex.Message);
+        //        }
+        //    }
+
+        //    Imgproc.MorphologyEx(mask, morbyte, Imgproc.MorphDilate, kernel);
+        //    Imgproc.FindContours(morbyte, contour2, hierarchy,
+        //            Imgproc.RetrExternal, Imgproc.ChainApproxNone);
+        //    for (int ind = 0; ind < contour2.Count; ind++)
+        //    {
+        //        rectan3 = Imgproc.BoundingRect(contour2[ind]);
+        //        rectan3 = Imgproc.BoundingRect(contour2[ind]);
+        //        if (rectan3.Area() > 0.5 * imgsize || rectan3.Area() < 100
+        //                || rectan3.Width / rectan3.Height < 2)
+        //        {
+        //            Mat roi = new Mat(morbyte, rectan3);
+        //            roi.SetTo(zeos);
+
+        //        }
+        //        else
+        //            Imgproc.Rectangle(mRGB, rectan3.Br(), rectan3.Tl(), CONTOUR_COLOR);
+        //    }
+
+        //    Bitmap resultrgb;
+        //    resultrgb = Bitmap.CreateBitmap(mRGB.Cols(), mRGB.Rows(), Bitmap.Config.Argb8888);
+        //    Utils.MatToBitmap(mRGB, resultrgb);
+
+        //    showImage(getBytesFromBitmap(resultrgb));
+        //}
+
     }
 }

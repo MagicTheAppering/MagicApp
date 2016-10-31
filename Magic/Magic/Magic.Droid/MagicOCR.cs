@@ -11,7 +11,7 @@ namespace Magic.Shared.magicocr
 {
     static class OCR
     {
-        private static TesseractApi api = null;
+        private static TesseractApi api;
 
         static OCR()
         {
@@ -20,6 +20,7 @@ namespace Magic.Shared.magicocr
         //Api starten und Trainingsdaten laden
         public static async Task<bool> initTes(TesseractApi api)
         {
+            OCR.api = api;
             bool initialised = await api.Init("eng");
 
             return initialised;
