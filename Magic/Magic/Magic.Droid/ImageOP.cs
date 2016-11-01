@@ -248,10 +248,10 @@ namespace Magic.Shared.imgop
             Mat rgb = new Mat();
 
             //Bild zu Matrix umwandeln
-            Utils.BitmapToMat(img, rgb);
+            Utils.BitmapToMat(img, large);
 
             // downsample and use it for processing
-            //Imgproc.PyrDown(large, rgb);
+            Imgproc.PyrDown(large, rgb);
 
             //Grey
             Imgproc.CvtColor(rgb, small, Imgproc.ColorBgr2gray);
@@ -331,6 +331,7 @@ namespace Magic.Shared.imgop
 
                         part = await OCR.getText(bmpOcr);
                         resulttext = resulttext + part;
+                        Console.WriteLine("------------------Durchlauf-------------");
 
                     }
                     catch (Exception e)

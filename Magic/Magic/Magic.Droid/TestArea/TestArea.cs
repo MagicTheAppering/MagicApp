@@ -117,9 +117,11 @@ namespace Magic.Droid
                 double size = Convert.ToDouble(textseekSize.Text.ToString());
                 size = size / 100;
                 Bitmap imgTemp = ImageOp.resizeImage(img, size, size);
-                //Bitmap result = ImageOp.greyImg(imgTemp);
+                double thresh = Convert.ToDouble(textseekThresh.Text.ToString());
+                double blur = Convert.ToDouble(textseekBlur.Text.ToString());
+                Bitmap result = ImageOp.greyImg(imgTemp,thresh,blur);
 
-                imgResult.SetImageBitmap(imgTemp);
+                imgResult.SetImageBitmap(result);
             };
 
 
